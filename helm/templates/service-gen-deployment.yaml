@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Paginations
+  labels:
+    app: Paginations
+spec:
+  selector:
+    matchLabels:
+      app: Paginations
+  replicas:  1
+  template:
+    metadata:
+      labels:
+        app: Paginations
+    spec:
+      containers:
+       - name: Paginations
+         image: evolza/Paginations:latest
+         imagePullPolicy: Always
+         ports:
+          - containerPort: 8080
+            name: rest
+      imagePullSecrets:
+          - name: notavailable

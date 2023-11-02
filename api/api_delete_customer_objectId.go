@@ -1,0 +1,33 @@
+package api
+
+import (
+  "Paginations/utils"
+  "github.com/gofiber/fiber/v2"
+
+  "Paginations/dao"
+  )
+
+// @Summary      DELETE Customer input: Customer
+// @Description  DELETE Customer API
+// @Tags         DELETE Customer - Customer
+// @Accept       json
+// @Produce      json
+// @Param        objectId query []string false "string collection"  collectionFormat(multi)
+// @Success      200  {array}   dto.Model_Customer "Status OK"
+// @Success      202  {array}   dto.Model_Customer "Status Accepted"
+// @Failure      404 "Not Found"
+// @Router      /DeleteCustomer [DELETE]
+
+    func DeleteCustomerApi(c *fiber.Ctx) error {
+
+
+objectId := c.Query("objectId")
+    err := dao.DB_DeleteCustomer(objectId)
+    if err != nil {
+        return utils.SendErrorResponse(c, fiber.StatusBadRequest, err.Error())
+    }
+
+
+return utils.SendSuccessResponse(c)
+    
+}

@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.HOST_PASSWORD }}
           script: |
             export SERVER_NAME="Paginations-APP026.demo.cgaas.ai"
-            export SOURCE_PORT="7704"
+            export SOURCE_PORT="8515"
             export TARGET_PORT="8888"
             export SERVICE_NAME="paginations"
             export DOCKER_USER_NAME="evolza"

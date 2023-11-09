@@ -1,11 +1,12 @@
 package api
 
 import (
-  "Paginations/utils"
-  "github.com/gofiber/fiber/v2"
+	"Paginations/utils"
 
-  "Paginations/dao"
-  )
+	"github.com/gofiber/fiber/v2"
+
+	"Paginations/dao"
+)
 
 // @Summary      GET Customer input: Customer
 // @Description  GET Customer API
@@ -18,14 +19,14 @@ import (
 // @Failure      404 "Not Found"
 // @Router      /FindallCustomer [GET]
 
-    func FindallCustomerApi(c *fiber.Ctx) error {
+func FindallCustomerApi(c *fiber.Ctx) error {
+	pageNo := c.Query("pageNo")
+	requestedRecords := c.Query("requestedRecords")
 
+	returnValue, err := dao.DB_FindallCustomer(pageNo, requestedRecords)
+	if err != nil {
+		return utils.SendErrorResponse(c, fiber.StatusBadRequest, err.Error())
+	}
 
-returnValue, err := dao.DB_FindallCustomer()
-    if err != nil {
-        return utils.SendErrorResponse(c, fiber.StatusBadRequest, err.Error())
-    }
-
-
-return c.Status(fiber.StatusAccepted).JSON(&returnValue)
+	return c.Status(fiber.StatusAccepted).JSON(&returnValue)
 }

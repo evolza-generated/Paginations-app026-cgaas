@@ -39,21 +39,20 @@ func Router(app *fiber.App) {
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 	DefaultMappings(check, store)
-	RouteMappings(api,store)
+	RouteMappings(api, store)
 }
 
 func RouteMappings(cg fiber.Router, store *session.Store) {
-cg.Post("/CreateCustomer", api.CreateCustomerApi)
-cg.Put("/UpdateCustomer", api.UpdateCustomerApi)
-cg.Delete("/DeleteCustomer", api.DeleteCustomerApi)
-cg.Get("/FindCustomer", api.FindCustomerApi)
-cg.Get("/FindallCustomer", api.FindallCustomerApi)
-cg.Post("/CreateDriver", api.CreateDriverApi)
-cg.Put("/UpdateDriver", api.UpdateDriverApi)
-cg.Delete("/DeleteDriver", api.DeleteDriverApi)
-cg.Get("/FindDriver", api.FindDriverApi)
-cg.Get("/FindallDriver", api.FindallDriverApi)
-
+	cg.Post("/CreateCustomer", api.CreateCustomerApi)
+	cg.Put("/UpdateCustomer", api.UpdateCustomerApi)
+	cg.Delete("/DeleteCustomer", api.DeleteCustomerApi)
+	cg.Get("/FindCustomer", api.FindCustomerApi)
+	cg.Get("/FindallCustomer", api.FindallCustomerApi)
+	cg.Post("/CreateDriver", api.CreateDriverApi)
+	cg.Put("/UpdateDriver", api.UpdateDriverApi)
+	cg.Delete("/DeleteDriver", api.DeleteDriverApi)
+	cg.Get("/FindDriver", api.FindDriverApi)
+	cg.Get("/FindallDriver", api.FindallDriverApi)
 
 }
 

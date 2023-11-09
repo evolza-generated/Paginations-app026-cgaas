@@ -53,6 +53,7 @@ func RouteMappings(cg fiber.Router, store *session.Store) {
 	cg.Delete("/DeleteDriver", api.DeleteDriverApi)
 	cg.Get("/FindDriver", api.FindDriverApi)
 	cg.Get("/FindallDriver", api.FindallDriverApi)
+	cg.Get("/findFileCount", api.FindfFileCount)
 
 }
 

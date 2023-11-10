@@ -10,26 +10,34 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func DB_FindallCustomer(pageNo, reqRecords string) (*[]dto.Customer, error) {
+func DB_FindallCustomer(counter, reqRecords string) (*[]dto.Customer, error) {
 	var objects []dto.Customer
-	limitPageNo, err := strconv.Atoi(pageNo)
+
+	skipCount, err := strconv.Atoi(counter)
 	if err != nil {
 		return nil, err
 	}
+
 	requestedRecordCount, err := strconv.Atoi(reqRecords)
 	if err != nil {
 		return nil, err
 	}
-	skipPageNo := limitPageNo*requestedRecordCount - requestedRecordCount
+
 	filter := bson.M{}
-	opts := options.Find().SetLimit(int64(requestedRecordCount)).SetSkip(int64(skipPageNo))
+	opts := options.Find().SetLimit(int64(requestedRecordCount)).SetSkip(int64(skipCount))
+
 	results, err := dbConfig.DATABASE.Collection("Customers").Find(context.TODO(), filter, opts)
+	if err != nil {
+		return nil, err
+	}
+
 	for results.Next(context.Background()) {
 		var object dto.Customer
-		if err = results.Decode(&object); err != nil {
+		if err := results.Decode(&object); err != nil {
 			return nil, err
 		}
 		objects = append(objects, object)
 	}
+
 	return &objects, nil
 }

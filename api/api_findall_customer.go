@@ -20,10 +20,10 @@ import (
 // @Router      /FindallCustomer [GET]
 
 func FindallCustomerApi(c *fiber.Ctx) error {
-	pageNo := c.Query("pageNo")
+	count := c.Query("count")
 	requestedRecords := c.Query("requestedRecords")
 
-	returnValue, err := dao.DB_FindallCustomer(pageNo, requestedRecords)
+	returnValue, err := dao.DB_FindallCustomer(count, requestedRecords)
 	if err != nil {
 		return utils.SendErrorResponse(c, fiber.StatusBadRequest, err.Error())
 	}
